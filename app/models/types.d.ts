@@ -1,13 +1,15 @@
-import { Group } from "three";
+import { DataTexture, Group } from "three";
 
-export type LoaderType = "gltf" | "texture" | "rgbe";
+export type LoaderType = "gltf" | "texture" | "rgbe" | "envmap";
 
 /**
  * Loaded resource object
  */
-export interface Resource {
-  scene: Group;
-}
+export type Resource =
+  | {
+      scene: Group;
+    }
+  | DataTexture;
 
 /**
  * Base model interface

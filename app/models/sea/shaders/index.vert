@@ -14,6 +14,8 @@ void main() {
     vElevation = elevation;
 
     modelPosition.y += elevation;
+    modelPosition.x += 8.6 * elevation;
+    modelPosition.z += 8.9 * elevation;
 
     gl_Position = projectionMatrix * viewMatrix * modelPosition;
 }

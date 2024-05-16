@@ -31,7 +31,7 @@ export default class SeaModel extends Group {
       uTime: { value: 0 },
     };
 
-    const geometry = new PlaneGeometry(10, 10, 100, 100);
+    const geometry = new PlaneGeometry(250, 100, 100, 100);
     const material = new ShaderMaterial({
       vertexShader,
       fragmentShader,
@@ -40,7 +40,6 @@ export default class SeaModel extends Group {
 
     const mesh = new Mesh(geometry, material);
     mesh.position.z = -5;
-    mesh.position.y = 1.5;
     mesh.rotation.x = -Math.PI / 2;
 
     this.add(mesh);

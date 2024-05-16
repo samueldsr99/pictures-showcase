@@ -41,6 +41,14 @@ export const loadResource = (type, path) =>
           return await loader.loadAsync(path);
         },
       },
+      {
+        pattern: "envmap",
+        result: async () => {
+          const loader = new RGBELoader();
+          /** @type {any} */
+          return await loader.loadAsync(path);
+        },
+      },
     ],
     fallback: () => {
       throw new Error(`Unknown loader type: ${type}`);

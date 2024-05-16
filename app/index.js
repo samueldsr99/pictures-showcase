@@ -17,12 +17,16 @@ import {
   Vector3,
   Clock,
   AxesHelper,
+  DataTexture,
+  EquirectangularReflectionMapping,
 } from "three";
+import { GroundedSkybox } from "three/examples/jsm/objects/GroundedSkybox";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import Stats from "stats.js";
 import TreeModel from "./models/tree";
 import FloorModel from "./models/floor";
 import SeaModel from "./models/sea";
+import Skybox from "./models/skybox";
 
 const DEBUG = true;
 
@@ -128,12 +132,27 @@ export default class App {
 
     // Sea
     const sea = new SeaModel();
-    sea.position.set(0, -0.1, 0);
+    sea.position.set(0, 0, -80);
     this._scene.add(sea);
+
+    // Sky
+    const skybox = new Skybox();
+    /** @type {DataTexture} */
+    const envmap = await skybox.loadResource();
+    envmap.mapping = EquirectangularReflectionMapping;
+    const params = {
+      height: 10,
+      radius: 200,
+    };
+    const sky = new GroundedSkybox(envmap, params.height, params.radius);
+    sky.position.y = params.height - 1;
+    this._scene.add(sky);
+    this._scene.environment = envmap;
 
     this._models.set("tree", tree);
     this._models.set("floor", floor);
     this._models.set("sea", sea);
+    this._models.set("skybox", skybox);
   }
 
   // Event handlers

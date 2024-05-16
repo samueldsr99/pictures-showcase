@@ -5,6 +5,7 @@ import {
   Mesh,
   MeshStandardMaterial,
   PlaneGeometry,
+  RepeatWrapping,
   ShaderMaterial,
   TextureLoader,
 } from "three";
@@ -27,7 +28,7 @@ export default class FloorModel extends Group {
   }
 
   _init() {
-    const geometry = new PlaneGeometry(600, 600);
+    const geometry = new PlaneGeometry(600, 600, 100, 100);
     const sandTexture = new TextureLoader().load(
       "app/models/floor/assets/sand-2.jpg"
     );
@@ -45,9 +46,9 @@ export default class FloorModel extends Group {
         uTexture: { value: sandTexture },
       },
     });
+    // repeat
     const floor = new Mesh(geometry, material);
     floor.rotation.x = -Math.PI / 2;
-    floor.castShadow = false;
     floor.receiveShadow = true;
 
     geometry.setAttribute("aRandom", new BufferAttribute(aRandom, 1));
