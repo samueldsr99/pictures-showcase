@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "app/*": ["./*"],
+      },
+      "moduleResolution": "Bundler",
+      "checkJs": true,
+      "target": "ESNext",
+      "module": "ESNext",
+      "strictNullChecks": true,
+      "resolveJsonModule": true,
+      "types": ["vite-plugin-glsl/ext"]
+    },
+    "exclude": ["node_modules", "docs"]
+  }
