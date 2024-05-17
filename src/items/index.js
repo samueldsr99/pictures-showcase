@@ -1,92 +1,95 @@
 import Item from "../item";
 import { MathUtils, Group, Raycaster } from "three";
 
-const ITEMS = [
-  new Item({
-    imagePath: "src/item/assets/images/cq5dam.web.hebebed.2000.2000.jpg",
-    title: "Cotton Twill Pants",
-    description: "A pair of cotton twill pants",
-  }),
-  new Item({
-    imagePath: "src/item/assets/images/prada-1.png",
-    title: "Cotton Twill Pants",
-    description: "A pair of cotton twill pants",
-  }),
-  new Item({
-    imagePath: "src/item/assets/images/agatha-ruiz-de-la-prada.jpg",
-    title: "Cotton Twill Pants",
-    description: "A pair of cotton twill pants",
-  }),
-  new Item({
-    imagePath: "src/item/assets/images/PRADA_MENS-SS24-CAMPAIGN_06-scaled.jpg",
-    title: "Cotton Twill Pants",
-    description: "A pair of cotton twill pants",
-  }),
-  new Item({
-    imagePath: "src/item/assets/images/29432eea0f5ff8cf63c16da59d73a683.jpg",
-    title: "Cotton Twill Pants",
-    description: "A pair of cotton twill pants",
-  }),
-  new Item({
-    imagePath: "src/item/assets/images/prada-2.jpg",
-    title: "Cotton Twill Pants",
-    description: "A pair of cotton twill pants",
-  }),
-  new Item({
-    imagePath: "src/item/assets/images/prada-3.jpg",
-    title: "Cotton Twill Pants",
-    description: "A pair of cotton twill pants",
-  }),
-  new Item({
-    imagePath: "src/item/assets/images/prada-4.jpg",
-    title: "Cotton Twill Pants",
-    description: "A pair of cotton twill pants",
-  }),
-  new Item({
-    imagePath: "src/item/assets/images/prada-5.jpg",
-    title: "Cotton Twill Pants",
-    description: "A pair of cotton twill pants",
-  }),
-  new Item({
-    imagePath: "src/item/assets/images/prada-6.jpg",
-    title: "Cotton Twill Pants",
-    description: "A pair of cotton twill pants",
-  }),
-  new Item({
-    imagePath: "src/item/assets/images/prada-7.jpg",
-    title: "Cotton Twill Pants",
-    description: "A pair of cotton twill pants",
-  }),
-  new Item({
-    imagePath: "src/item/assets/images/prada-8.jpg",
-    title: "Cotton Twill Pants",
-    description: "A pair of cotton twill pants",
-  }),
-  new Item({
-    imagePath: "src/item/assets/images/prada-9.jpg",
-    title: "Cotton Twill Pants",
-    description: "A pair of cotton twill pants",
-  }),
-  new Item({
-    imagePath: "src/item/assets/images/prada-10.jpg",
-    title: "Cotton Twill Pants",
-    description: "A pair of cotton twill pants",
-  }),
-  new Item({
-    imagePath: "src/item/assets/images/prada-11.jpg",
-    title: "Cotton Twill Pants",
-    description: "A pair of cotton twill pants",
-  }),
-  new Item({
-    imagePath: "src/item/assets/images/prada-12.jpg",
-    title: "Cotton Twill Pants",
-    description: "A pair of cotton twill pants",
-  }),
-];
-
 export default class Items extends Group {
   constructor(camera) {
     super();
+
+    const ITEMS = [
+      new Item({
+        imagePath: "src/item/assets/images/cq5dam.web.hebebed.2000.2000.jpg",
+        title: "Cotton Twill Pants",
+        description: "A pair of cotton twill pants",
+      }),
+      new Item({
+        imagePath: "src/item/assets/images/prada-1.png",
+        title: "Cotton Twill Pants",
+        description: "A pair of cotton twill pants",
+      }),
+      new Item({
+        imagePath: "src/item/assets/images/agatha-ruiz-de-la-prada.jpg",
+        title: "Cotton Twill Pants",
+        description: "A pair of cotton twill pants",
+      }),
+      new Item({
+        imagePath:
+          "src/item/assets/images/PRADA_MENS-SS24-CAMPAIGN_06-scaled.jpg",
+        title: "Cotton Twill Pants",
+        description: "A pair of cotton twill pants",
+      }),
+      new Item({
+        imagePath:
+          "src/item/assets/images/29432eea0f5ff8cf63c16da59d73a683.jpg",
+        title: "Cotton Twill Pants",
+        description: "A pair of cotton twill pants",
+      }),
+      new Item({
+        imagePath: "src/item/assets/images/prada-2.jpg",
+        title: "Cotton Twill Pants",
+        description: "A pair of cotton twill pants",
+      }),
+      new Item({
+        imagePath: "src/item/assets/images/prada-3.jpg",
+        title: "Cotton Twill Pants",
+        description: "A pair of cotton twill pants",
+      }),
+      new Item({
+        imagePath: "src/item/assets/images/prada-4.jpg",
+        title: "Cotton Twill Pants",
+        description: "A pair of cotton twill pants",
+      }),
+      new Item({
+        imagePath: "src/item/assets/images/prada-5.jpg",
+        title: "Cotton Twill Pants",
+        description: "A pair of cotton twill pants",
+      }),
+      new Item({
+        imagePath: "src/item/assets/images/prada-6.jpg",
+        title: "Cotton Twill Pants",
+        description: "A pair of cotton twill pants",
+      }),
+      new Item({
+        imagePath: "src/item/assets/images/prada-7.jpg",
+        title: "Cotton Twill Pants",
+        description: "A pair of cotton twill pants",
+      }),
+      new Item({
+        imagePath: "src/item/assets/images/prada-8.jpg",
+        title: "Cotton Twill Pants",
+        description: "A pair of cotton twill pants",
+      }),
+      new Item({
+        imagePath: "src/item/assets/images/prada-9.jpg",
+        title: "Cotton Twill Pants",
+        description: "A pair of cotton twill pants",
+      }),
+      new Item({
+        imagePath: "src/item/assets/images/prada-10.jpg",
+        title: "Cotton Twill Pants",
+        description: "A pair of cotton twill pants",
+      }),
+      new Item({
+        imagePath: "src/item/assets/images/prada-11.jpg",
+        title: "Cotton Twill Pants",
+        description: "A pair of cotton twill pants",
+      }),
+      new Item({
+        imagePath: "src/item/assets/images/prada-12.jpg",
+        title: "Cotton Twill Pants",
+        description: "A pair of cotton twill pants",
+      }),
+    ];
+
     this._items = ITEMS;
     this._camera = camera;
     this._currentInFront = null;
@@ -182,7 +185,7 @@ export default class Items extends Group {
 
   update({ walkDirection, delta }) {
     for (let i = 0, n = this._items.length; i < n; i++) {
-      this._items[0].update({ walkDirection, delta });
+      this._items[i].update({ walkDirection, delta });
     }
   }
 }

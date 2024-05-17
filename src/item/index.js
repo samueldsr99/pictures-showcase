@@ -137,7 +137,7 @@ export default class Item extends Mesh {
       return;
     }
 
-    this._uniforms.uIsInFront.value = this._isInFront;
+    this._uniforms.uIsInFront.value = this._isInFront ?? false;
     this._uniforms.uTime.value = delta;
     this._uniforms.uWalkDirection.value = walkDirection;
 
