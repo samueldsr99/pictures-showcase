@@ -2,26 +2,14 @@ import {
   PerspectiveCamera,
   WebGLRenderer,
   Scene,
-  Mesh,
-  BoxGeometry,
-  ShaderMaterial,
-  BufferAttribute,
   Color,
-  MeshBasicMaterial,
-  Group,
   AmbientLight,
-  SpotLight,
-  SphereGeometry,
-  PlaneGeometry,
-  Euler,
-  Vector3,
   Vector2,
   Clock,
   AxesHelper,
-  DataTexture,
-  EquirectangularReflectionMapping,
-  MathUtils,
   PointLight,
+  Vector3,
+  DirectionalLight,
 } from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import Stats from "stats.js";
@@ -30,6 +18,8 @@ import Items from "./items";
 import { gsap } from "gsap";
 import { EffectComposer } from "three/examples/jsm/Addons.js";
 import Composer from "./postprocessing";
+import Moon from "./moon";
+import Glass from "./glass";
 
 const DEBUG = false;
 
@@ -86,10 +76,10 @@ export default class App {
     // this._scene.add(axesHelper);
 
     this._initCamera();
-    this._initLights();
     this._initStats();
     this._initEvents();
     this._buildEnvironment();
+    this._initLights();
 
     this._composer = new Composer({
       gl: this._gl,
@@ -114,8 +104,13 @@ export default class App {
 
   _initLights() {
     // light grey
-    const ambientLight = new AmbientLight(0x404040, 0.5);
+    const ambientLight = new AmbientLight(0x404040, 0.01);
     this._scene.add(ambientLight);
+
+    const directionalLight = new DirectionalLight(0xffffff, 20.5);
+    directionalLight.position.set(0, 0, 1);
+    directionalLight.lookAt(this._glass);
+    this._scene.add(directionalLight);
 
     // point light
     const pointLight = new PointLight(0xffffff, 10, 100);
@@ -149,13 +144,25 @@ export default class App {
   }
 
   async _buildEnvironment() {
-    this._models = new Map();
+    // Dark gray
     this._scene.background = new Color(0x000000);
 
+    // Pictures
     const items = new Items(this._camera);
     this._items = items;
-
     this._scene.add(items);
+
+    // Moon
+    const moon = new Moon();
+    moon.position.set(-4, 52, 0);
+    // this._moon = moon;
+    this._scene.add(moon);
+
+    // Glass
+    const glass = new Glass();
+    glass.position.set(0, 0, 0);
+    this._glass = glass;
+    this._scene.add(glass);
   }
 
   // Event handlers
@@ -185,10 +192,6 @@ export default class App {
       this._composer._chromaticAberrationEffect.offset.x = 0;
       this._composer._chromaticAberrationEffect.offset.y = 0;
     }
-
-    // move the point light
-    this._pointLight.position.x = dx * 10;
-    this._pointLight.position.y = dy * 10;
 
     if (distanceToCenter > 0.3) {
       this._state.isWalking = true;
@@ -226,6 +229,7 @@ export default class App {
     const delta = this._clock.getDelta();
 
     this._items.update({ walkDirection: state.walkDirection, delta });
+    this._glass.update({ delta });
 
     // Walking thing
     if (state.isWalking && this._items._currentInFront == null) {
@@ -241,6 +245,13 @@ export default class App {
       ) {
         this._camera.position.x += state.distanceToMove.x;
         this._camera.position.y += state.distanceToMove.y;
+
+        gsap.to(this._glass.position, {
+          x: this._camera.position.x,
+          y: this._camera.position.y,
+          duration: 2.5,
+          delay: 4,
+        });
       }
     }
   }
