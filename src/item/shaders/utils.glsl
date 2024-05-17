@@ -67,10 +67,10 @@ vec3 breathe(vec3 position, float time, float period, float amplitude) {
 }
 
 mat3 lookAtPoint(vec3 eye, vec3 at) {
-	vec3 localUp = vec3(0, 1, 0); // temp sop space up vector
-	vec3 fwd = normalize(at - eye); // direction to look at position
-	vec3 right = normalize(cross(localUp, fwd)); // right vector of direction
-	vec3 up = normalize(cross(fwd, right)); // up vector of direction
+	vec3 localUp = vec3(0, 1, 0);
+	vec3 fwd = normalize(at - eye);
+	vec3 right = normalize(cross(localUp, fwd));
+	vec3 up = normalize(cross(fwd, right));
 
 	return mat3(right, up, fwd);
 }

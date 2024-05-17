@@ -156,7 +156,7 @@ export default class App {
     const moon = new Moon();
     moon.position.set(-4, 52, 0);
     // this._moon = moon;
-    this._scene.add(moon);
+    // this._scene.add(moon);
 
     // Glass
     const glass = new Glass();
@@ -250,7 +250,7 @@ export default class App {
           x: this._camera.position.x,
           y: this._camera.position.y,
           duration: 2.5,
-          delay: 4,
+          delay: 2.5,
         });
       }
     }

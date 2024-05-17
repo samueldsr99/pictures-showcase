@@ -101,22 +101,19 @@ export default class Items extends Group {
   _generatePoints(N, gap) {
     const points = [];
     const gridSize = Math.ceil(Math.sqrt(N));
-    const randomRange = gap * 0.1; // Define el rango de ruido como el 10% del gap (puedes ajustar este valor)
+    const randomRange = gap * 0.1;
 
     let count = 0;
     for (let i = 0; i < gridSize; i++) {
       for (let j = 0; j < gridSize; j++) {
         if (count >= N) break;
 
-        // Calcular posición de la cuadrícula
         const x = i * gap;
         const y = j * gap;
 
-        // Agregar ruido aleatorio a los puntos
         const noiseX = x + MathUtils.randFloat(-randomRange, randomRange);
         const noiseY = y + MathUtils.randFloat(-randomRange, randomRange);
 
-        // Trasladar para que el centro sea el origen
         const centeredX = noiseX - (gridSize * gap) / 2;
         const centeredY = noiseY - (gridSize * gap) / 2;
 

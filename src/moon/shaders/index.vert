@@ -8,8 +8,5 @@ const float SCALE = 0.1;
 const float OFFSET = 0.0;
 
 void main() {
-    // withCraterNoise
-    // vec3 newPosition = withCraterNoise(position, INTENSITY, FREQUENCY, LACUNARITY, PERSISTENCE, SCALE, OFFSET);
-
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 }
