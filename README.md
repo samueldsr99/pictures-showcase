@@ -13,8 +13,7 @@ Showcase of pictures using Threejs + gsap with postprocessing effects and custom
 
 ## Description
 
-Whenever a user moves the mouse far from the center of the screen (biased by a circular area), the camera starts to move in the direction of the mouse.
-Causing a bend of the images in the same direction and a chromatic aberration effect.
+Whenever a user moves the mouse far from the center of the screen (biased by a circular area), the camera starts to move in the direction of the mouse, causing a bend of the images in the same direction and a chromatic aberration effect.
 Once the user clicks on an image, the camera moves to the image position and it starts to zoom in. While in this state, users are not
 able to move the camera.
 
