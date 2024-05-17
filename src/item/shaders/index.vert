@@ -22,22 +22,19 @@ void main() {
     d = 1.0 - smoothstep(0.0, 1.0, d);
 
     if (!uIsInFront) {
-
-        float bendFactor = uWalkDirection.x * 0.5;
-        bendFactor = clamp(bendFactor, BEND_FACTOR, BEND_FACTOR);
-        newPosition.x += d * bendFactor;
+        float bendFactorX = uWalkDirection.x * 0.5;
+        bendFactorX = clamp(bendFactorX, -BEND_FACTOR, BEND_FACTOR);
+        newPosition.x += d * bendFactorX;
 
         float bendFactorY = uWalkDirection.y * 0.5;
-        bendFactorY = clamp(bendFactorY, BEND_FACTOR, BEND_FACTOR);
+        bendFactorY = clamp(bendFactorY, -BEND_FACTOR, BEND_FACTOR);
         newPosition.y += d * bendFactorY;
     } else {
-        // Look at uWalkDirection, eye is the center of the mesh, target is uWalkDirection
         vec3 eye = vec3(0.0, 0.0, 0.0);
         vec3 target = vec3(uWalkDirection.xy, -1.0);
         mat3 lookAtMat = lookAtPoint(eye, target);
 
         vec3 newPosition = lookAtMat * newPosition;
-        
     }
 
     gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
