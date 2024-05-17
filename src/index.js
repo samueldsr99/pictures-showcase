@@ -3,7 +3,6 @@ import {
   WebGLRenderer,
   Scene,
   Color,
-  AmbientLight,
   Vector2,
   Clock,
   AxesHelper,
@@ -100,9 +99,6 @@ export default class App {
   }
 
   _initLights() {
-    const ambientLight = new AmbientLight(0x404040, 0.01);
-    this._scene.add(ambientLight);
-
     const directionalLight = new DirectionalLight(0xffffff, 20.5);
     directionalLight.position.set(0, 0, 1);
     directionalLight.lookAt(this._glass);
