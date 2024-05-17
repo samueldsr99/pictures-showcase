@@ -8,22 +8,22 @@ const ITEMS = [
     description: "A pair of cotton twill pants",
   }),
   new Item({
-    imagePath: "src/item/assets/images/cq5dam.web.hebebed.2000.2000.jpg",
+    imagePath: "src/item/assets/images/prada-1.png",
     title: "Cotton Twill Pants",
     description: "A pair of cotton twill pants",
   }),
   new Item({
-    imagePath: "src/item/assets/images/cq5dam.web.hebebed.2000.2000.jpg",
+    imagePath: "src/item/assets/images/agatha-ruiz-de-la-prada.jpg",
     title: "Cotton Twill Pants",
     description: "A pair of cotton twill pants",
   }),
   new Item({
-    imagePath: "src/item/assets/images/cq5dam.web.hebebed.2000.2000.jpg",
+    imagePath: "src/item/assets/images/PRADA_MENS-SS24-CAMPAIGN_06-scaled.jpg",
     title: "Cotton Twill Pants",
     description: "A pair of cotton twill pants",
   }),
   new Item({
-    imagePath: "src/item/assets/images/cq5dam.web.hebebed.2000.2000.jpg",
+    imagePath: "src/item/assets/images/29432eea0f5ff8cf63c16da59d73a683.jpg",
     title: "Cotton Twill Pants",
     description: "A pair of cotton twill pants",
   }),
@@ -59,13 +59,45 @@ export default class Items extends Group {
     this._init();
   }
 
+  _generatePoints(N, gap) {
+    const points = [];
+    const gridSize = Math.ceil(Math.sqrt(N));
+    const randomRange = gap * 0.1; // Define el rango de ruido como el 10% del gap (puedes ajustar este valor)
+
+    let count = 0;
+    for (let i = 0; i < gridSize; i++) {
+      for (let j = 0; j < gridSize; j++) {
+        if (count >= N) break;
+
+        // Calcular posición de la cuadrícula
+        const x = i * gap;
+        const y = j * gap;
+
+        // Agregar ruido aleatorio a los puntos
+        const noiseX = x + MathUtils.randFloat(-randomRange, randomRange);
+        const noiseY = y + MathUtils.randFloat(-randomRange, randomRange);
+
+        points.push({ x: noiseX, y: noiseY });
+        count++;
+      }
+    }
+
+    return points;
+  }
+
   _init() {
-    for (const item of this._items) {
-      item.position.set(
-        MathUtils.randFloat(-20, 20),
-        MathUtils.randFloat(-20, 20),
-        0
-      );
+    // Organize elements in a grid-like way
+    const N = this._items.length;
+
+    const points = this._generatePoints(N, 23.2);
+
+    for (let i = 0, n = this._items.length; i < n; i++) {
+      const item = this._items[i];
+
+      item.position.x = points[i].x;
+      item.position.y = points[i].y;
+      console.log(item.position.x, item.position.y);
+
       this.add(item);
     }
   }
@@ -110,11 +142,9 @@ export default class Items extends Group {
     }
   }
 
-  update() {
-    const time = performance.now() * 0.001;
-
+  update({ walkDirection, delta }) {
     for (let i = 0, n = this._items.length; i < n; i++) {
-      this._items[0].update();
+      this._items[0].update({ walkDirection, delta });
     }
   }
 }

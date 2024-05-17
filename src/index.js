@@ -21,15 +21,15 @@ import {
   DataTexture,
   EquirectangularReflectionMapping,
   MathUtils,
+  PointLight,
 } from "three";
-import { GroundedSkybox } from "three/examples/jsm/objects/GroundedSkybox";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { PointerLockControls } from "three/addons/controls/PointerLockControls.js";
 import Stats from "stats.js";
 import Item from "./item";
-import { match_ } from "./utils/match";
 import Items from "./items";
 import { gsap } from "gsap";
+import { EffectComposer } from "three/examples/jsm/Addons.js";
+import Composer from "./postprocessing";
 
 const DEBUG = false;
 
@@ -40,6 +40,9 @@ const VELOCITY = 0.3;
 export default class App {
   /** @type {WebGLRenderer} */
   _gl;
+
+  /** @type {EffectComposer} */
+  _composer;
 
   /** @type {PerspectiveCamera} */
   _camera;
@@ -74,25 +77,25 @@ export default class App {
     this._gl.setSize(window.innerWidth, window.innerHeight);
     this._gl.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
 
-    this._state = {
-      isWalking: false,
-      walkDirection: null,
-      distanceToMove: { x: 0, y: 0 },
-    };
-
     this._clock = new Clock();
 
     this._initScene();
     this._initState();
 
     const axesHelper = new AxesHelper(5);
-    this._scene.add(axesHelper);
+    // this._scene.add(axesHelper);
 
     this._initCamera();
     this._initLights();
     this._initStats();
     this._initEvents();
     this._buildEnvironment();
+
+    this._composer = new Composer({
+      gl: this._gl,
+      camera: this._camera,
+      scene: this._scene,
+    });
 
     if (DEBUG) {
       new OrbitControls(this._camera, this._gl.domElement);
@@ -102,13 +105,23 @@ export default class App {
   }
 
   _initState() {
-    this._isWalking = false;
-    this._walkDirection = new Vector3(0, 0, 0);
+    this._state = {
+      isWalking: false,
+      walkDirection: new Vector2(0, 0),
+      distanceToMove: { x: 0, y: 0 },
+    };
   }
 
   _initLights() {
-    const ambientLight = new AmbientLight(0xffffff, 0.5);
+    // light grey
+    const ambientLight = new AmbientLight(0x404040, 0.5);
     this._scene.add(ambientLight);
+
+    // point light
+    const pointLight = new PointLight(0xffffff, 10, 100);
+    pointLight.position.set(0, 0, -2);
+    this._pointLight = pointLight;
+    this._scene.add(pointLight);
   }
 
   _initCamera() {
@@ -163,6 +176,10 @@ export default class App {
 
     const distanceToCenter = Math.sqrt(dx * dx + dy * dy);
 
+    // move the point light
+    this._pointLight.position.x = dx * 10;
+    this._pointLight.position.y = dy * 10;
+
     if (distanceToCenter > 0.3) {
       this._state.isWalking = true;
       this._state.walkDirection = new Vector2(dx, dy);
@@ -173,7 +190,8 @@ export default class App {
       });
     } else {
       this._state.isWalking = false;
-      this._state.walkDirection = null;
+      this._state.walkDirection.x = 0;
+      this._state.walkDirection.y = 0;
     }
   }
 
@@ -195,15 +213,12 @@ export default class App {
 
   _updateModelsState() {
     const state = this._state;
+    const delta = this._clock.getDelta();
 
-    this._items.update();
+    this._items.update({ walkDirection: state.walkDirection, delta });
 
     // Walking thing
-    if (
-      state.isWalking &&
-      state.walkDirection != null &&
-      this._items._currentInFront == null
-    ) {
+    if (state.isWalking && this._items._currentInFront == null) {
       const isWithin = (x, y) => {
         return x > BOUND_MIN && x < BOUND_MAX && y > BOUND_MIN && y < BOUND_MAX;
       };
@@ -214,7 +229,6 @@ export default class App {
           this._camera.position.y + state.distanceToMove.y
         )
       ) {
-        // Without gsap
         this._camera.position.x += state.distanceToMove.x;
         this._camera.position.y += state.distanceToMove.y;
       }
@@ -225,7 +239,17 @@ export default class App {
   _animate() {
     this._stats.begin();
     this._updateModelsState();
-    this._gl.render(this._scene, this._camera);
+
+    if (this._state.isWalking && this._items._currentInFront == null) {
+      this._composer._chromaticAberrationEffect.offset.x = 0.002;
+      this._composer._chromaticAberrationEffect.offset.y = 0.002;
+    } else {
+      this._composer._chromaticAberrationEffect.offset.x = 0;
+      this._composer._chromaticAberrationEffect.offset.y = 0;
+    }
+
+    this._composer.render();
+    // this._gl.render(this._scene, this._camera);
     this._stats.end();
     window.requestAnimationFrame(this._animate.bind(this));
   }

@@ -8,6 +8,7 @@ import {
   RepeatWrapping,
   ShaderMaterial,
   BoxGeometry,
+  Vector2,
 } from "three";
 import gsap from "gsap";
 
@@ -34,6 +35,8 @@ export default class Item extends Mesh {
     this._uniforms = {
       uTexture: { value: texture },
       uIsInFront: { value: this._isInFront },
+      uWalkDirection: { value: new Vector2(0, 0) },
+      uTime: { value: 0 },
     };
 
     const geometry = new PlaneGeometry(1, 1, 32, 32);
@@ -109,7 +112,6 @@ export default class Item extends Mesh {
     this._titleMesh.visible = true;
     this._descriptionMesh.visible = true;
     this._isInFront = true;
-    console.log("bring to front", this._isInFront);
 
     gsap.to(this.position, {
       z: 32,
@@ -130,12 +132,15 @@ export default class Item extends Mesh {
     });
   }
 
-  update() {
+  update({ walkDirection, delta }) {
     if (!this._uniforms) {
       return;
     }
 
     this._uniforms.uIsInFront.value = this._isInFront;
+    this._uniforms.uTime.value = delta;
+    this._uniforms.uWalkDirection.value = walkDirection;
+
     if (this._mesh) {
       this._mesh.material.uniforms = this._uniforms;
     }

@@ -15,6 +15,7 @@
   "dependencies": {
     "gsap": "^3.12.5",
     "maath": "^0.10.7",
+    "postprocessing": "^6.35.4",
     "stats.js": "^0.17.0",
     "three": "^0.164.1"
   }
