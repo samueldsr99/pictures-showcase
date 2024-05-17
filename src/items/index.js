@@ -8,31 +8,29 @@ export default class Items extends Group {
 
     const ITEMS = [
       new Item({
-        imagePath: "src/item/assets/images/cq5dam.web.hebebed.2000.2000.jpg",
+        imagePath: "/assets/images/cq5dam.web.hebebed.2000.2000.jpg",
       }),
-      new Item({ imagePath: "src/item/assets/images/prada-1.png" }),
+      new Item({ imagePath: "/assets/images/prada-1.png" }),
       new Item({
-        imagePath: "src/item/assets/images/agatha-ruiz-de-la-prada.jpg",
-      }),
-      new Item({
-        imagePath:
-          "src/item/assets/images/PRADA_MENS-SS24-CAMPAIGN_06-scaled.jpg",
+        imagePath: "/assets/images/agatha-ruiz-de-la-prada.jpg",
       }),
       new Item({
-        imagePath:
-          "src/item/assets/images/29432eea0f5ff8cf63c16da59d73a683.jpg",
+        imagePath: "/assets/images/PRADA_MENS-SS24-CAMPAIGN_06-scaled.jpg",
       }),
-      new Item({ imagePath: "src/item/assets/images/prada-2.jpg" }),
-      new Item({ imagePath: "src/item/assets/images/prada-3.jpg" }),
-      new Item({ imagePath: "src/item/assets/images/prada-4.jpg" }),
-      new Item({ imagePath: "src/item/assets/images/prada-5.jpg" }),
-      new Item({ imagePath: "src/item/assets/images/prada-6.jpg" }),
-      new Item({ imagePath: "src/item/assets/images/prada-7.jpg" }),
-      new Item({ imagePath: "src/item/assets/images/prada-8.jpg" }),
-      new Item({ imagePath: "src/item/assets/images/prada-9.jpg" }),
-      new Item({ imagePath: "src/item/assets/images/prada-10.jpg" }),
-      new Item({ imagePath: "src/item/assets/images/prada-11.jpg" }),
-      new Item({ imagePath: "src/item/assets/images/prada-12.jpg" }),
+      new Item({
+        imagePath: "/assets/images/29432eea0f5ff8cf63c16da59d73a683.jpg",
+      }),
+      new Item({ imagePath: "/assets/images/prada-2.jpg" }),
+      new Item({ imagePath: "/assets/images/prada-3.jpg" }),
+      new Item({ imagePath: "/assets/images/prada-4.jpg" }),
+      new Item({ imagePath: "/assets/images/prada-5.jpg" }),
+      new Item({ imagePath: "/assets/images/prada-6.jpg" }),
+      new Item({ imagePath: "/assets/images/prada-7.jpg" }),
+      new Item({ imagePath: "/assets/images/prada-8.jpg" }),
+      new Item({ imagePath: "/assets/images/prada-9.jpg" }),
+      new Item({ imagePath: "/assets/images/prada-10.jpg" }),
+      new Item({ imagePath: "/assets/images/prada-11.jpg" }),
+      new Item({ imagePath: "/assets/images/prada-12.jpg" }),
     ];
 
     this._items = ITEMS;
