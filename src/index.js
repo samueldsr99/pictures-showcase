@@ -35,7 +35,7 @@ const DEBUG = false;
 
 const BOUND_MIN = -60;
 const BOUND_MAX = 60;
-const VELOCITY = 0.3;
+const SPEED = 0.5;
 
 export default class App {
   /** @type {WebGLRenderer} */
@@ -176,6 +176,16 @@ export default class App {
 
     const distanceToCenter = Math.sqrt(dx * dx + dy * dy);
 
+    const chromaticOffset = 0.006 * distanceToCenter * distanceToCenter;
+
+    if (this._state.isWalking && this._items._currentInFront == null) {
+      this._composer._chromaticAberrationEffect.offset.x = chromaticOffset;
+      this._composer._chromaticAberrationEffect.offset.y = chromaticOffset;
+    } else {
+      this._composer._chromaticAberrationEffect.offset.x = 0;
+      this._composer._chromaticAberrationEffect.offset.y = 0;
+    }
+
     // move the point light
     this._pointLight.position.x = dx * 10;
     this._pointLight.position.y = dy * 10;
@@ -184,8 +194,8 @@ export default class App {
       this._state.isWalking = true;
       this._state.walkDirection = new Vector2(dx, dy);
       gsap.to(this._state.distanceToMove, {
-        x: dx * VELOCITY,
-        y: dy * VELOCITY,
+        x: dx * SPEED,
+        y: dy * SPEED,
         ease: "power2.out",
       });
     } else {
@@ -239,14 +249,6 @@ export default class App {
   _animate() {
     this._stats.begin();
     this._updateModelsState();
-
-    if (this._state.isWalking && this._items._currentInFront == null) {
-      this._composer._chromaticAberrationEffect.offset.x = 0.002;
-      this._composer._chromaticAberrationEffect.offset.y = 0.002;
-    } else {
-      this._composer._chromaticAberrationEffect.offset.x = 0;
-      this._composer._chromaticAberrationEffect.offset.y = 0;
-    }
 
     this._composer.render();
     // this._gl.render(this._scene, this._camera);
