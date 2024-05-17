@@ -1,24 +1,10 @@
-import {
-  Camera,
-  FloatType,
-  PerspectiveCamera,
-  Scene,
-  Vector2,
-  WebGLRenderer,
-} from "three";
-import { ShaderPass } from "three/addons/postprocessing/ShaderPass.js";
-
+import { FloatType, Vector2 } from "three";
 import {
   ChromaticAberrationEffect,
   EffectComposer,
   EffectPass,
-  PixelationEffect,
   RenderPass,
-  SSAOEffect,
 } from "postprocessing";
-import { LuminosityShader } from "three/examples/jsm/Addons.js";
-import { Light } from "three";
-import { Mesh } from "three";
 
 export default class PostProcessing {
   _gl;

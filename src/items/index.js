@@ -9,86 +9,30 @@ export default class Items extends Group {
     const ITEMS = [
       new Item({
         imagePath: "src/item/assets/images/cq5dam.web.hebebed.2000.2000.jpg",
-        title: "Cotton Twill Pants",
-        description: "A pair of cotton twill pants",
       }),
-      new Item({
-        imagePath: "src/item/assets/images/prada-1.png",
-        title: "Cotton Twill Pants",
-        description: "A pair of cotton twill pants",
-      }),
+      new Item({ imagePath: "src/item/assets/images/prada-1.png" }),
       new Item({
         imagePath: "src/item/assets/images/agatha-ruiz-de-la-prada.jpg",
-        title: "Cotton Twill Pants",
-        description: "A pair of cotton twill pants",
       }),
       new Item({
         imagePath:
           "src/item/assets/images/PRADA_MENS-SS24-CAMPAIGN_06-scaled.jpg",
-        title: "Cotton Twill Pants",
-        description: "A pair of cotton twill pants",
       }),
       new Item({
         imagePath:
           "src/item/assets/images/29432eea0f5ff8cf63c16da59d73a683.jpg",
-        title: "Cotton Twill Pants",
-        description: "A pair of cotton twill pants",
       }),
-      new Item({
-        imagePath: "src/item/assets/images/prada-2.jpg",
-        title: "Cotton Twill Pants",
-        description: "A pair of cotton twill pants",
-      }),
-      new Item({
-        imagePath: "src/item/assets/images/prada-3.jpg",
-        title: "Cotton Twill Pants",
-        description: "A pair of cotton twill pants",
-      }),
-      new Item({
-        imagePath: "src/item/assets/images/prada-4.jpg",
-        title: "Cotton Twill Pants",
-        description: "A pair of cotton twill pants",
-      }),
-      new Item({
-        imagePath: "src/item/assets/images/prada-5.jpg",
-        title: "Cotton Twill Pants",
-        description: "A pair of cotton twill pants",
-      }),
-      new Item({
-        imagePath: "src/item/assets/images/prada-6.jpg",
-        title: "Cotton Twill Pants",
-        description: "A pair of cotton twill pants",
-      }),
-      new Item({
-        imagePath: "src/item/assets/images/prada-7.jpg",
-        title: "Cotton Twill Pants",
-        description: "A pair of cotton twill pants",
-      }),
-      new Item({
-        imagePath: "src/item/assets/images/prada-8.jpg",
-        title: "Cotton Twill Pants",
-        description: "A pair of cotton twill pants",
-      }),
-      new Item({
-        imagePath: "src/item/assets/images/prada-9.jpg",
-        title: "Cotton Twill Pants",
-        description: "A pair of cotton twill pants",
-      }),
-      new Item({
-        imagePath: "src/item/assets/images/prada-10.jpg",
-        title: "Cotton Twill Pants",
-        description: "A pair of cotton twill pants",
-      }),
-      new Item({
-        imagePath: "src/item/assets/images/prada-11.jpg",
-        title: "Cotton Twill Pants",
-        description: "A pair of cotton twill pants",
-      }),
-      new Item({
-        imagePath: "src/item/assets/images/prada-12.jpg",
-        title: "Cotton Twill Pants",
-        description: "A pair of cotton twill pants",
-      }),
+      new Item({ imagePath: "src/item/assets/images/prada-2.jpg" }),
+      new Item({ imagePath: "src/item/assets/images/prada-3.jpg" }),
+      new Item({ imagePath: "src/item/assets/images/prada-4.jpg" }),
+      new Item({ imagePath: "src/item/assets/images/prada-5.jpg" }),
+      new Item({ imagePath: "src/item/assets/images/prada-6.jpg" }),
+      new Item({ imagePath: "src/item/assets/images/prada-7.jpg" }),
+      new Item({ imagePath: "src/item/assets/images/prada-8.jpg" }),
+      new Item({ imagePath: "src/item/assets/images/prada-9.jpg" }),
+      new Item({ imagePath: "src/item/assets/images/prada-10.jpg" }),
+      new Item({ imagePath: "src/item/assets/images/prada-11.jpg" }),
+      new Item({ imagePath: "src/item/assets/images/prada-12.jpg" }),
     ];
 
     this._items = ITEMS;
@@ -126,9 +70,7 @@ export default class Items extends Group {
   }
 
   _init() {
-    // Organize elements in a grid-like way
     const N = this._items.length;
-
     const points = this._generatePoints(N, 23.2);
 
     for (let i = 0, n = this._items.length; i < n; i++) {

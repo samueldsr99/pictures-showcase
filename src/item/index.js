@@ -1,27 +1,21 @@
 import {
   Mesh,
-  Group,
-  MeshBasicMaterial,
   PlaneGeometry,
   TextureLoader,
   SRGBColorSpace,
   RepeatWrapping,
   ShaderMaterial,
-  BoxGeometry,
   Vector2,
 } from "three";
 import gsap from "gsap";
 
 import vertexShader from "./shaders/index.vert";
 import fragmentShader from "./shaders/index.frag";
-import { FontLoader, TextGeometry } from "three/examples/jsm/Addons.js";
 
 export default class Item extends Mesh {
-  constructor({ camera, imagePath, title, description, width = 8 }) {
+  constructor({ camera, imagePath, width = 8 }) {
     super();
     this.imagePath = imagePath;
-    this.title = title;
-    this.description = description;
     this.width = width;
     this._camera = camera;
 
@@ -60,44 +54,6 @@ export default class Item extends Mesh {
     mesh.scale.set(meshWidth, meshHeight, 1);
 
     this.add(mesh);
-
-    this._initTexts();
-  }
-
-  async _initTexts() {
-    // Load fonts
-    const loader = new FontLoader();
-    const pradaFont = await loader.loadAsync("src/fonts/prada.json");
-
-    // Title text
-    const titleGeometry = new TextGeometry(this.title, {
-      font: pradaFont,
-      size: 0.2,
-      depth: 0.07,
-    });
-    const titleMaterial = new MeshBasicMaterial({
-      color: 0x333333,
-    });
-    const titleMesh = new Mesh(titleGeometry, titleMaterial);
-    this._titleMesh = titleMesh;
-    titleMesh.position.set(-2, -2, 0.1);
-    titleMesh.visible = false;
-    this.add(titleMesh);
-
-    // Description text
-    const descriptionGeometry = new TextGeometry(this.description, {
-      font: pradaFont,
-      size: 0.08,
-      depth: 0.01,
-    });
-    const descriptionMaterial = new MeshBasicMaterial({
-      color: 0x333333,
-    });
-    const descriptionMesh = new Mesh(descriptionGeometry, descriptionMaterial);
-    this._descriptionMesh = descriptionMesh;
-    descriptionMesh.position.set(-2, -2.3, 0.1);
-    descriptionMesh.visible = false;
-    this.add(descriptionMesh);
   }
 
   /**
@@ -109,8 +65,6 @@ export default class Item extends Mesh {
       this.resetPosition();
     }
 
-    this._titleMesh.visible = true;
-    this._descriptionMesh.visible = true;
     this._isInFront = true;
 
     gsap.to(this.position, {
@@ -121,8 +75,6 @@ export default class Item extends Mesh {
 
   resetPosition() {
     this._isInFront = false;
-    this._titleMesh.visible = false;
-    this._descriptionMesh.visible = false;
 
     gsap.to(this.position, {
       x: this._initialPosition.x,

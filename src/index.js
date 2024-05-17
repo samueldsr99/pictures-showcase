@@ -7,8 +7,6 @@ import {
   Vector2,
   Clock,
   AxesHelper,
-  PointLight,
-  Vector3,
   DirectionalLight,
 } from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
@@ -18,7 +16,6 @@ import Items from "./items";
 import { gsap } from "gsap";
 import { EffectComposer } from "three/examples/jsm/Addons.js";
 import Composer from "./postprocessing";
-import Moon from "./moon";
 import Glass from "./glass";
 
 const DEBUG = false;
@@ -103,7 +100,6 @@ export default class App {
   }
 
   _initLights() {
-    // light grey
     const ambientLight = new AmbientLight(0x404040, 0.01);
     this._scene.add(ambientLight);
 
@@ -111,12 +107,6 @@ export default class App {
     directionalLight.position.set(0, 0, 1);
     directionalLight.lookAt(this._glass);
     this._scene.add(directionalLight);
-
-    // point light
-    const pointLight = new PointLight(0xffffff, 10, 100);
-    pointLight.position.set(0, 0, -2);
-    this._pointLight = pointLight;
-    this._scene.add(pointLight);
   }
 
   _initCamera() {
@@ -138,8 +128,6 @@ export default class App {
   _initEvents() {
     window.addEventListener("resize", this._handleResize.bind(this));
     window.addEventListener("mousemove", this._handleMouseMove.bind(this));
-    // window.addEventListener("keydown", this._handleKeyDown.bind(this));
-    // window.addEventListener("keyup", this._handleKeyUp.bind(this));
     window.addEventListener("click", this._handleClick.bind(this));
   }
 
@@ -151,12 +139,6 @@ export default class App {
     const items = new Items(this._camera);
     this._items = items;
     this._scene.add(items);
-
-    // Moon
-    const moon = new Moon();
-    moon.position.set(-4, 52, 0);
-    // this._moon = moon;
-    // this._scene.add(moon);
 
     // Glass
     const glass = new Glass();
@@ -210,19 +192,11 @@ export default class App {
 
   /**
    *
-   * @param {KeyboardEvent} e
-   */
-  _handleKeyDown(e) {}
-
-  /**
-   *
    * @param {PointerEvent} e
    */
   _handleClick(e) {
     this._items.onClick(e);
   }
-
-  _handleKeyUp() {}
 
   _updateModelsState() {
     const state = this._state;
@@ -262,7 +236,6 @@ export default class App {
     this._updateModelsState();
 
     this._composer.render();
-    // this._gl.render(this._scene, this._camera);
     this._stats.end();
     window.requestAnimationFrame(this._animate.bind(this));
   }
