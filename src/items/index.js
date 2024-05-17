@@ -1,3 +1,4 @@
+import { gsap } from "gsap";
 import Item from "../item";
 import { MathUtils, Group, Raycaster } from "three";
 
@@ -170,8 +171,11 @@ export default class Items extends Group {
 
     for (const item of this._items) {
       if (item.children[0].uuid === uuid) {
-        this._camera.position.x = item.position.x;
-        this._camera.position.y = item.position.y;
+        gsap.to(this._camera.position, {
+          x: item.position.x,
+          y: item.position.y,
+          duration: 0.5,
+        });
 
         if (item._isInFront) {
           item.resetPosition();

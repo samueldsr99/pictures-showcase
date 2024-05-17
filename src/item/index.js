@@ -39,7 +39,7 @@ export default class Item extends Mesh {
       uTime: { value: 0 },
     };
 
-    const geometry = new PlaneGeometry(1, 1, 32, 32);
+    const geometry = new PlaneGeometry(1, 1, 50, 50);
     const material = new ShaderMaterial({
       vertexShader,
       fragmentShader,
