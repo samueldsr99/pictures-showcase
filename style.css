@@ -1,6 +1,56 @@
-body {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  font-family: "Courier New", Courier, monospace;
+}
+
+body {
+  box-sizing: border-box;
   overflow: hidden;
+  cursor: none;
+}
+
+.instructions-modal {
+  position: fixed;
+  z-index: 999;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+#instructions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px;
+  background-color: aquamarine;
+  width: 600px;
+  border-radius: 12px;
+  text-align: center;
+
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+}
+
+#instructions > button {
+  background-color: salmon;
+  border: none;
+  outline: none;
+  padding: 12px 32px;
+
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 auto;
+
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#instructions > button:hover {
+  background-color: tomato;
+}
+
+#instructions > button:active {
+  background-color: darkred;
 }
