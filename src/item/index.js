@@ -17,7 +17,7 @@ import fragmentShader from "./shaders/index.frag";
 import { FontLoader, TextGeometry } from "three/examples/jsm/Addons.js";
 
 export default class Item extends Mesh {
-  constructor({ camera, imagePath, title, description, width = 5 }) {
+  constructor({ camera, imagePath, title, description, width = 8 }) {
     super();
     this.imagePath = imagePath;
     this.title = title;
@@ -114,7 +114,7 @@ export default class Item extends Mesh {
     this._isInFront = true;
 
     gsap.to(this.position, {
-      z: 32,
+      z: 28,
       duration: 0.5,
     });
   }

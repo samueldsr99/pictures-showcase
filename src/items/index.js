@@ -28,22 +28,57 @@ const ITEMS = [
     description: "A pair of cotton twill pants",
   }),
   new Item({
-    imagePath: "src/item/assets/images/cq5dam.web.hebebed.2000.2000.jpg",
+    imagePath: "src/item/assets/images/prada-2.jpg",
     title: "Cotton Twill Pants",
     description: "A pair of cotton twill pants",
   }),
   new Item({
-    imagePath: "src/item/assets/images/cq5dam.web.hebebed.2000.2000.jpg",
+    imagePath: "src/item/assets/images/prada-3.jpg",
     title: "Cotton Twill Pants",
     description: "A pair of cotton twill pants",
   }),
   new Item({
-    imagePath: "src/item/assets/images/cq5dam.web.hebebed.2000.2000.jpg",
+    imagePath: "src/item/assets/images/prada-4.jpg",
     title: "Cotton Twill Pants",
     description: "A pair of cotton twill pants",
   }),
   new Item({
-    imagePath: "src/item/assets/images/cq5dam.web.hebebed.2000.2000.jpg",
+    imagePath: "src/item/assets/images/prada-5.jpg",
+    title: "Cotton Twill Pants",
+    description: "A pair of cotton twill pants",
+  }),
+  new Item({
+    imagePath: "src/item/assets/images/prada-6.jpg",
+    title: "Cotton Twill Pants",
+    description: "A pair of cotton twill pants",
+  }),
+  new Item({
+    imagePath: "src/item/assets/images/prada-7.jpg",
+    title: "Cotton Twill Pants",
+    description: "A pair of cotton twill pants",
+  }),
+  new Item({
+    imagePath: "src/item/assets/images/prada-8.jpg",
+    title: "Cotton Twill Pants",
+    description: "A pair of cotton twill pants",
+  }),
+  new Item({
+    imagePath: "src/item/assets/images/prada-9.jpg",
+    title: "Cotton Twill Pants",
+    description: "A pair of cotton twill pants",
+  }),
+  new Item({
+    imagePath: "src/item/assets/images/prada-10.jpg",
+    title: "Cotton Twill Pants",
+    description: "A pair of cotton twill pants",
+  }),
+  new Item({
+    imagePath: "src/item/assets/images/prada-11.jpg",
+    title: "Cotton Twill Pants",
+    description: "A pair of cotton twill pants",
+  }),
+  new Item({
+    imagePath: "src/item/assets/images/prada-12.jpg",
     title: "Cotton Twill Pants",
     description: "A pair of cotton twill pants",
   }),
@@ -77,7 +112,11 @@ export default class Items extends Group {
         const noiseX = x + MathUtils.randFloat(-randomRange, randomRange);
         const noiseY = y + MathUtils.randFloat(-randomRange, randomRange);
 
-        points.push({ x: noiseX, y: noiseY });
+        // Trasladar para que el centro sea el origen
+        const centeredX = noiseX - (gridSize * gap) / 2;
+        const centeredY = noiseY - (gridSize * gap) / 2;
+
+        points.push({ x: centeredX, y: centeredY });
         count++;
       }
     }
@@ -96,7 +135,6 @@ export default class Items extends Group {
 
       item.position.x = points[i].x;
       item.position.y = points[i].y;
-      console.log(item.position.x, item.position.y);
 
       this.add(item);
     }
